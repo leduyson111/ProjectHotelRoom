@@ -75,8 +75,6 @@ class RoomController extends Controller
 
     public function update($id, Request $request)
     {
-
-
         $dataUpdate = [
             'room_no' => $request->room_no,
             'floor' => $request->floor,
@@ -88,17 +86,27 @@ class RoomController extends Controller
             $dataUpdate['image'] = str_replace('public/', '', $path);
         }
         $rooms = $this->rooms->find($id)->update($dataUpdate);
+        $this->roomservices->where('room_id' ,$id)->delete();
+
         foreach ($request->service_id as $key => $value) {
+           
             $dataUpdateSeriveRoom = [
                 'room_id' => $id,
                 'service_id' => $value,
                 'additional_price' => $request->additional_price[$key],
             ];
-            $this->roomservices->where('room_id', $id)->update($dataUpdateSeriveRoom);
+
+            $this->roomservices->create($dataUpdateSeriveRoom);
+
         }
 
         return redirect()->route('rooms')->with('status', 'Cập nhật phòng thành công');
     }
+
+
+
+
+
 
     public function delete($id)
     {
