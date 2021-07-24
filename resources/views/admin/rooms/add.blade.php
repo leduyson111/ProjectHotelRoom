@@ -10,7 +10,6 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
     <script src="{{ asset('admins/rooms/add.js') }}"></script>
-
     <script>
         function addServices(e) {
             e.preventDefault();
@@ -20,14 +19,11 @@
             e.preventDefault();
             $(this).parent().parent().remove();
         }
-
         $(function() {
             $(document).on("click", '.add_services', addServices);
             $(document).on('click', '.delete_services', deleteServices);
         })
     </script>
-
-
 
 @endsection
 

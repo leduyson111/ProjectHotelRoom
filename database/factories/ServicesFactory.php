@@ -23,7 +23,7 @@ class ServicesFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'icon' => rand(1,10),
+            'icon' => 'https://picsum.photos/640/480',
         ];
     }
 }
