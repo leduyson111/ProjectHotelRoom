@@ -26,7 +26,6 @@
                             <i class="material-icons">note_add</i>
                             <span>Thêm phòng</span>
                         </a>
-
                     </div>
                     <div class="card-body p-0 pb-3 text-center">
                         <table class="table mb-0">
@@ -41,7 +40,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-
                                 @foreach ($rooms as $room)
                                     <tr>
                                         <td>{{ $room->id }}</td>
@@ -55,9 +53,6 @@
                                         </td>
                                     </tr>
                                 @endforeach
-
-
-
 
                             </tbody>
                         </table>

@@ -23,17 +23,13 @@ class RoomController extends Controller
 
     public function index()
     {
-
         $rooms =   $this->rooms->all();
-
         return view('admin.rooms.index', compact('rooms'));
     }
 
     public function edit($id)
     {
-
         $services = $this->services->all();
-
         $room = $this->rooms->find($id);
         $roomservices = RoomServices::where('room_id', $id)->get();
         return view('admin.rooms.edit', compact('room', 'services', 'roomservices'));
