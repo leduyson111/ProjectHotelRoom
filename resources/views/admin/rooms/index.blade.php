@@ -11,7 +11,6 @@
 @section('content')
     <div class="main-content-container container-fluid px-4">
         @include('admin.partials.title-content', ['name'=>'Trang phòng'])
-
         @if (session('status'))
             <div class="alert alert-success">
                 {{ session('status') }}
@@ -45,7 +44,7 @@
                                         <td>{{ $room->id }}</td>
                                         <td>{{ $room->room_no }}</td>
                                         <td>{{ $room->floor }}</td>
-                                        <td><img src="{{ asset($room->image) }}" alt=""></td>
+                                        <td><img width="200" height="200" src="{{ asset($room->image) }}" alt=""></td>
                                         <td>{{ $room->price }}</td>
                                         <td>
                                           <a href="{{ route('rooms.edit', ['id' =>$room->id]) }}" class="mb-2 btn btn-info mr-2 ">Sửa</a>

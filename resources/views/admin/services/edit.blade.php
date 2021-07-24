@@ -25,13 +25,13 @@
             <div class="input-group mb-3">
                 <input  type="file" name="icon"  class="form-control"  > 
             </div>
-            <img src="{{asset( 'storage/' . $service->icon)}}" alt="">
+            <img width="200" height="200" src="{{asset($service->icon)}}" alt="Lỗi">
 
         </div>
  
      
         &nbsp;&nbsp;&nbsp;    
-        <button type="submit" class="mb-2 btn btn-success mr-2">Thêm</button>
+        <button type="submit" class="mb-2 btn btn-success mr-2">Sửa</button>
         <a href="{{ route('services') }}" class="mb-2 btn btn-danger mr-2">Hủy</a>
    
 </form>

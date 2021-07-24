@@ -1,7 +1,6 @@
 @extends('admin.layouts.admin')
 
 @section('title', 'Sửa phòng')
-
 @section('css')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
@@ -32,7 +31,7 @@
 
 @section('content')
     <div class="main-content-container container-fluid px-4">
-        @include('admin.partials.title-content', ['name'=>'Thêm phòng'])
+        @include('admin.partials.title-content', ['name'=>'Sửa phòng'])
 
         <form action="{{ route('rooms.update', ['id'=>$room->id]) }}" class="add-new-post" enctype="multipart/form-data" method="POST">
             @csrf
@@ -108,6 +107,7 @@
                     <div class="input-group mb-3">
                         <input type="file" name="image" id="image">
                     </div>
+                    <img width="150" height="150" src="{{ $room->image}}" alt="lỗi">
                 </div>
             </div>
 
@@ -118,7 +118,7 @@
                         rows="10">{{ $room->detail }}</textarea>
                 </div>
             </div>
-            <button type="submit" class="mb-2 btn btn-success mr-2">Thêm</button>
+            <button type="submit" class="mb-2 btn btn-success mr-2">Sửa</button>
             <a href="{{ route('services') }}" class="mb-2 btn btn-danger mr-2">Hủy</a>
         </form>
     </div>

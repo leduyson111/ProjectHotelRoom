@@ -52,10 +52,6 @@ class RoomController extends Controller
             'price' => $request->price,
         ];
 
-        // if ($request->hasFile('image')) {
-        //     $path = $request->file('image')->storeAs('public/uploads/rooms', uniqid() . '-' . $request->image->getClientOriginalName());
-        //     $dataCreate['image'] = str_replace('public/', '', $path);
-        // }
 
         if ($request->hasFile('image')) {
             $file  =$request->image;
@@ -87,31 +83,28 @@ class RoomController extends Controller
             'detail' => $request->detail,
             'price' => $request->price,
         ];
+
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->storeAs('public/uploads/rooms', uniqid() . '-' . $request->image->getClientOriginalName());
-            $dataUpdate['image'] = str_replace('public/', '', $path);
+            $file  =$request->image;
+            $fileNameHash = Str::random(20).'.'.$file->getClientOriginalExtension();
+            $filePath = $request->file('image')->storeAs('public/rooms', $fileNameHash);
+            $dataCreate['image'] = Storage::url($filePath);
         }
+     
         $rooms = $this->rooms->find($id)->update($dataUpdate);
         $this->roomservices->where('room_id' ,$id)->delete();
 
         foreach ($request->service_id as $key => $value) {
-           
             $dataUpdateSeriveRoom = [
                 'room_id' => $id,
                 'service_id' => $value,
                 'additional_price' => $request->additional_price[$key],
             ];
-
             $this->roomservices->create($dataUpdateSeriveRoom);
-
         }
 
         return redirect()->route('rooms')->with('status', 'Cập nhật phòng thành công');
     }
-
-
-
-
 
 
     public function delete($id)

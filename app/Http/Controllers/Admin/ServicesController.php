@@ -61,11 +61,11 @@ class ServicesController extends Controller
         $dataUpdate = [
             'name' => $request->name,
         ];
-
-
         if ($request->hasFile('icon')) {
-            $path = $request->file('icon')->storeAs('public/uploads/services', uniqid() . '-' . $request->icon->getClientOriginalName());
-            $dataUpdate['icon'] = str_replace('public/', '', $path);
+            $file  =$request->icon;
+            $fileNameHash = Str::random(20).'.'.$file->getClientOriginalExtension();
+            $filePath = $request->file('icon')->storeAs('public/services', $fileNameHash);
+            $dataUpdate[ 'icon' ] = Storage::url($filePath);
         }
 
         $this->services->find($id)->update($dataUpdate);
