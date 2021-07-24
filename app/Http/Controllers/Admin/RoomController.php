@@ -41,7 +41,6 @@ class RoomController extends Controller
 
     public function add()
     {
-        /// thếm
         $services = $this->services->all();
         return view('admin.rooms.add', compact('services'));
     }
