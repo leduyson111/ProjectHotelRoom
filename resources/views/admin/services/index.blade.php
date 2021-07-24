@@ -44,7 +44,7 @@
                 <tr>
                   <td>{{ $service->id }}</td>
                   <td>{{ $service->name }}</td>
-                  <td><img src="{{asset( 'storage/' . $service->icon)}}" alt=""></td>
+                  <td><img src="{{asset($service->icon)}}" alt="Lỗi"></td>
                   <td>
                     <a href="{{ route('services.edit', ['id' =>$service->id]) }}" class="mb-2 btn btn-info mr-2 ">Sửa</a>
                     <a href="" data-url="{{ route('services.delete', ['id' => $service->id]) }}" class="mb-2 btn btn-danger mr-2 action_delete">Xóa</a>

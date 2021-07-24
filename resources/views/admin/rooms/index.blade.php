@@ -45,7 +45,7 @@
                                         <td>{{ $room->id }}</td>
                                         <td>{{ $room->room_no }}</td>
                                         <td>{{ $room->floor }}</td>
-                                        <td><img src="{{ asset('storage/' . $room->image) }}" alt=""></td>
+                                        <td><img src="{{ asset($room->image) }}" alt=""></td>
                                         <td>{{ $room->price }}</td>
                                         <td>
                                           <a href="{{ route('rooms.edit', ['id' =>$room->id]) }}" class="mb-2 btn btn-info mr-2 ">Sửa</a>

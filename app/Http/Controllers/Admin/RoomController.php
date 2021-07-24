@@ -9,6 +9,8 @@ use App\Models\Services;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class RoomController extends Controller
 {
@@ -49,12 +51,20 @@ class RoomController extends Controller
             'detail' => $request->detail,
             'price' => $request->price,
         ];
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->storeAs('public/uploads/rooms', uniqid() . '-' . $request->image->getClientOriginalName());
-            $dataCreate['image'] = str_replace('public/', '', $path);
-        }
-        $rooms = $this->rooms->create($dataCreate);
 
+        // if ($request->hasFile('image')) {
+        //     $path = $request->file('image')->storeAs('public/uploads/rooms', uniqid() . '-' . $request->image->getClientOriginalName());
+        //     $dataCreate['image'] = str_replace('public/', '', $path);
+        // }
+
+        if ($request->hasFile('image')) {
+            $file  =$request->image;
+            $fileNameHash = Str::random(20).'.'.$file->getClientOriginalExtension();
+            $filePath = $request->file('image')->storeAs('public/rooms', $fileNameHash);
+            $dataCreate['image'] = Storage::url($filePath);
+        }
+     
+        $rooms = $this->rooms->create($dataCreate);
         if ($request->service_id) {
             foreach ($request->service_id as $key => $value) {
                 $dataCreatesee = [

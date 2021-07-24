@@ -7,6 +7,10 @@ use App\Models\Services;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+
+
 
 class ServicesController extends Controller
 {
@@ -31,14 +35,17 @@ class ServicesController extends Controller
 
     public function store(Request $request)
     {
-
         $dataCreate = [ 'name' => $request->name  ];
-
+        // if ($request->hasFile('icon')) {
+        //     $path = $request->file('icon')->storeAs('public/uploads/services', uniqid() . '-' . $request->icon->getClientOriginalName());
+        //     $dataCreate['icon'] = str_replace('public/', '', $path);
+        // }
         if ($request->hasFile('icon')) {
-            $path = $request->file('icon')->storeAs('public/uploads/services', uniqid() . '-' . $request->icon->getClientOriginalName());
-            $dataCreate['icon'] = str_replace('public/', '', $path);
+            $file  =$request->icon;
+            $fileNameHash = Str::random(20).'.'.$file->getClientOriginalExtension();
+            $filePath = $request->file('icon')->storeAs('public/services', $fileNameHash);
+            $dataCreate[ 'icon' ] = Storage::url($filePath);
         }
-
         $this->services->create($dataCreate);
         return redirect()->route('services')->with('status', 'Thêm dịch vụ thành công');
     }
