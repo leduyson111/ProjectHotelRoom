@@ -41,7 +41,7 @@
                             <tbody>
                                 @foreach ($rooms as $room)
                                     <tr>
-                                        <td>{{ $room->id }}</td>
+                                        <td>{{(($rooms->currentPage()-1)*15) + $loop->iteration}}</td>
                                         <td>{{ $room->room_no }}</td>
                                         <td>{{ $room->floor }}</td>
                                         <td><img width="200" height="200" src="{{ asset($room->image) }}" alt=""></td>
@@ -55,6 +55,7 @@
 
                             </tbody>
                         </table>
+                        {{$rooms->links()}}
 
                     </div>
                 </div>

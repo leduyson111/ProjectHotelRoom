@@ -40,7 +40,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">@</span>
                         </div>
-                        <input type="text" name="room_no" class="form-control" placeholder="Nhập tên phòng">
+                        <input type="text" required name="room_no" class="form-control" placeholder="Nhập tên phòng">
                     </div>
                 </div>
 
@@ -76,7 +76,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">@</span>
                         </div>
-                        <input type="text" name="price" id="price" class="form-control" placeholder="Nhập tên danh mục">
+                        <input type="text" required name="price" id="price" class="form-control" placeholder="Nhập tên danh mục">
                     </div>
                 </div>
 
@@ -86,7 +86,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">@</span>
                         </div>
-                        <input min="1" max="30" type="number" name="floor" id="floor" class="form-control"
+                        <input min="1" max="30" type="number" required name="floor" id="floor" class="form-control"
                             placeholder="Số tầng">
                     </div>
                 </div>
@@ -96,7 +96,7 @@
                 <div class="form-group col-md-6">
                     <label for="image" class="text-muted d-block mb-2">Ảnh phòng</label>
                     <div class="input-group mb-3">
-                        <input type="file" name="image" id="image">
+                        <input required type="file" name="image" id="image">
                     </div>
                 </div>
             </div>
@@ -104,7 +104,7 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="inputState" class="text-muted d-block mb-2">Mô tả phòng</label>
-                    <textarea class="form-control tinymce_editor_init" name="detail" cols="30" rows="10"></textarea>
+                    <textarea required class="form-control tinymce_editor_init" name="detail" cols="30" rows="10"></textarea>
                 </div>
             </div>
             <button type="submit" class="mb-2 btn btn-success mr-2">Thêm</button>

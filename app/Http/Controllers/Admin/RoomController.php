@@ -25,7 +25,7 @@ class RoomController extends Controller
 
     public function index()
     {
-        $rooms =   $this->rooms->all();
+        $rooms =   $this->rooms->paginate(15);
         return view('admin.rooms.index', compact('rooms'));
     }
 
@@ -52,15 +52,15 @@ class RoomController extends Controller
             'price' => $request->price,
         ];
 
-
         if ($request->hasFile('image')) {
-            $file  =$request->image;
-            $fileNameHash = Str::random(20).'.'.$file->getClientOriginalExtension();
+            $file  = $request->image;
+            $fileNameHash = Str::random(20) . '.' . $file->getClientOriginalExtension();
             $filePath = $request->file('image')->storeAs('public/rooms', $fileNameHash);
             $dataCreate['image'] = Storage::url($filePath);
         }
-     
+
         $rooms = $this->rooms->create($dataCreate);
+
         if ($request->service_id) {
             foreach ($request->service_id as $key => $value) {
                 $dataCreatesee = [
@@ -71,7 +71,6 @@ class RoomController extends Controller
                 $this->roomservices->create($dataCreatesee);
             }
         }
-
         return redirect()->route('rooms')->with('status', 'Thêm phòng thành công');
     }
 
@@ -85,24 +84,24 @@ class RoomController extends Controller
         ];
 
         if ($request->hasFile('image')) {
-            $file  =$request->image;
-            $fileNameHash = Str::random(20).'.'.$file->getClientOriginalExtension();
+            $file  = $request->image;
+            $fileNameHash = Str::random(20) . '.' . $file->getClientOriginalExtension();
             $filePath = $request->file('image')->storeAs('public/rooms', $fileNameHash);
-            $dataCreate['image'] = Storage::url($filePath);
+            $dataUpdate['image'] = Storage::url($filePath);
         }
-     
+
         $rooms = $this->rooms->find($id)->update($dataUpdate);
-        $this->roomservices->where('room_id' ,$id)->delete();
-
-        foreach ($request->service_id as $key => $value) {
-            $dataUpdateSeriveRoom = [
-                'room_id' => $id,
-                'service_id' => $value,
-                'additional_price' => $request->additional_price[$key],
-            ];
-            $this->roomservices->create($dataUpdateSeriveRoom);
+        $this->roomservices->where('room_id', $id)->delete();
+        if ($request->service_id) {
+            foreach ($request->service_id as $key => $value) {
+                $dataUpdateSeriveRoom = [
+                    'room_id' => $id,
+                    'service_id' => $value,
+                    'additional_price' => $request->additional_price[$key],
+                ];
+                $this->roomservices->create($dataUpdateSeriveRoom);
+            }
         }
-
         return redirect()->route('rooms')->with('status', 'Cập nhật phòng thành công');
     }
 

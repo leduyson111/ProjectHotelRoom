@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function index(){
-       $rooms =   Room::all();
+       $rooms =   Room::paginate(15);
         return view('admin.rooms.index', compact('rooms'));
     }
 }

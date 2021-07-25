@@ -16,14 +16,14 @@
                 <div class="input-group-prepend">
                 <span class="input-group-text">@</span>
                 </div>
-                <input type="text" name="name"  class="form-control" placeholder="Nhập tên dịch vụ" > 
+                <input type="text" required name="name"  class="form-control" placeholder="Nhập tên dịch vụ" > 
             </div>
         </div>
 
         <div class="form-group col-md-6">
             <label for="iputName" class="text-muted d-block mb-2">Icon</label>
             <div class="input-group mb-3">
-                <input  type="file" name="icon"  class="form-control"  > 
+                <input required  type="file" name="icon"  class="form-control"  > 
             </div>
         </div>
         &nbsp;&nbsp;&nbsp;    

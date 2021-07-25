@@ -23,7 +23,7 @@ class ServicesController extends Controller
     public function index()
     {
 
-        $services = $this->services->all();
+        $services = $this->services->paginate(15);
 
         return view('admin.services.index', compact('services'));
     }

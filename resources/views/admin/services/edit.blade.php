@@ -16,7 +16,7 @@
                 <div class="input-group-prepend">
                 <span class="input-group-text">@</span>
                 </div>
-                <input type="text" name="name"  value="{{$service->name  }}" class="form-control" placeholder="Nhập tên dịch vụ" > 
+                <input required type="text" name="name"  value="{{$service->name  }}" class="form-control" placeholder="Nhập tên dịch vụ" > 
             </div>
         </div>
 

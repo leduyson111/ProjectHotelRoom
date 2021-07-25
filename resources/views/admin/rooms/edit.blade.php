@@ -42,7 +42,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">@</span>
                         </div>
-                        <input  type="text" value="{{ $room->room_no }}" name="room_no" class="form-control"
+                        <input required  type="text" value="{{ $room->room_no }}" name="room_no" class="form-control"
                             placeholder="Nhập tên phòng">
                     </div>
                 </div>
@@ -84,7 +84,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">@</span>
                         </div>
-                        <input type="text" name="price" value="{{ $room->price }}" id="price" class="form-control"
+                        <input type="text" required name="price" value="{{ $room->price }}" id="price" class="form-control"
                             placeholder="Nhập tên danh mục">
                     </div>
                 </div>
@@ -95,7 +95,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">@</span>
                         </div>
-                        <input min="1" value="{{ $room->floor }}" max="30" type="number" name="floor" id="floor"
+                        <input min="1" required value="{{ $room->floor }}" max="30" type="number" name="floor" id="floor"
                             class="form-control" placeholder="Số tầng">
                     </div>
                 </div>
@@ -107,14 +107,14 @@
                     <div class="input-group mb-3">
                         <input type="file" name="image" id="image">
                     </div>
-                    <img width="150" height="150" src="{{ $room->image}}" alt="lỗi">
+                    <img width="150"  height="150" src="{{ $room->image}}" alt="lỗi">
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="inputState" class="text-muted d-block mb-2">Mô tả phòng</label>
-                    <textarea class="form-control tinymce_editor_init" name="detail" cols="30"
+                    <textarea required class="form-control tinymce_editor_init" name="detail" cols="30"
                         rows="10">{{ $room->detail }}</textarea>
                 </div>
             </div>

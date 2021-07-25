@@ -14,6 +14,6 @@ class RoomServicesSeeder extends Seeder
      */
     public function run()
     {
-       RoomServices::factory(5)->create();
+       RoomServices::factory(30)->create();
     }
 }

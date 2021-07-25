@@ -24,20 +24,20 @@
     <div class="nav-wrapper">
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link active" href="/">
+          <a class="nav-link {{  Request::is('/') ? 'active' : '' }} " href="/">
             <i class="material-icons">edit</i>
             <span>Dashboard</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="{{ route('services') }}">
+          <a class="nav-link {{  Route::currentRouteNamed('services*') ? 'active' : '' }} " href="{{ route('services') }}">
             <i class="material-icons">vertical_split</i>
             <span>Dịch vụ phòng</span>
           </a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link " href="{{ route('rooms') }}">
+          <a class="nav-link {{  Route::currentRouteNamed('rooms*') ? 'active' : ''  }}" href="{{ route('rooms') }}">
             <i class="fab fa-product-hunt"></i>
             <span>Danh sách phòng</span>
           </a>
