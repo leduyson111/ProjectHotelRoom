@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class,'index'])->name('admin.home');
-
+Route::group(['prefix' => 'laravel-filemanager' ], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
 
 
 Route::prefix('admin' )->group(function(){

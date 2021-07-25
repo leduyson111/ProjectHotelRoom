@@ -35,17 +35,17 @@ class ServicesController extends Controller
 
     public function store(Request $request)
     {
-        $dataCreate = [ 'name' => $request->name  ];
+        $dataCreate = [
+            'name' => $request->name,
+            'icon' => $request->icon
+        ];
+
         // if ($request->hasFile('icon')) {
-        //     $path = $request->file('icon')->storeAs('public/uploads/services', uniqid() . '-' . $request->icon->getClientOriginalName());
-        //     $dataCreate['icon'] = str_replace('public/', '', $path);
+        //     $file  =$request->icon;
+        //     $fileNameHash = Str::random(20).'.'.$file->getClientOriginalExtension();
+        //     $filePath = $request->file('icon')->storeAs('public/services', $fileNameHash);
+        //     $dataCreate[ 'icon' ] = Storage::url($filePath);
         // }
-        if ($request->hasFile('icon')) {
-            $file  =$request->icon;
-            $fileNameHash = Str::random(20).'.'.$file->getClientOriginalExtension();
-            $filePath = $request->file('icon')->storeAs('public/services', $fileNameHash);
-            $dataCreate[ 'icon' ] = Storage::url($filePath);
-        }
         $this->services->create($dataCreate);
         return redirect()->route('services')->with('status', 'Thêm dịch vụ thành công');
     }
@@ -60,13 +60,14 @@ class ServicesController extends Controller
     {
         $dataUpdate = [
             'name' => $request->name,
+            'icon' => $request->icon
         ];
-        if ($request->hasFile('icon')) {
-            $file  =$request->icon;
-            $fileNameHash = Str::random(20).'.'.$file->getClientOriginalExtension();
-            $filePath = $request->file('icon')->storeAs('public/services', $fileNameHash);
-            $dataUpdate[ 'icon' ] = Storage::url($filePath);
-        }
+        // if ($request->hasFile('icon')) {
+        //     $file  = $request->icon;
+        //     $fileNameHash = Str::random(20) . '.' . $file->getClientOriginalExtension();
+        //     $filePath = $request->file('icon')->storeAs('public/services', $fileNameHash);
+        //     $dataUpdate['icon'] = Storage::url($filePath);
+        // }
 
         $this->services->find($id)->update($dataUpdate);
         return redirect()->route('services')->with('status', 'Cập nhật dịch vụ thành công');

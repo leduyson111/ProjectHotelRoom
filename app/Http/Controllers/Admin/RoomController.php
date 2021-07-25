@@ -50,14 +50,15 @@ class RoomController extends Controller
             'floor' => $request->floor,
             'detail' => $request->detail,
             'price' => $request->price,
+            'image'=>$request->image,
         ];
 
-        if ($request->hasFile('image')) {
-            $file  = $request->image;
-            $fileNameHash = Str::random(20) . '.' . $file->getClientOriginalExtension();
-            $filePath = $request->file('image')->storeAs('public/rooms', $fileNameHash);
-            $dataCreate['image'] = Storage::url($filePath);
-        }
+        // if ($request->hasFile('image')) {
+        //     $file  = $request->image;
+        //     $fileNameHash = Str::random(20) . '.' . $file->getClientOriginalExtension();
+        //     $filePath = $request->file('image')->storeAs('public/rooms', $fileNameHash);
+        //     $dataCreate['image'] = Storage::url($filePath);
+        // }
 
         $rooms = $this->rooms->create($dataCreate);
 
@@ -81,14 +82,15 @@ class RoomController extends Controller
             'floor' => $request->floor,
             'detail' => $request->detail,
             'price' => $request->price,
+            'image'=>$request->image,
         ];
 
-        if ($request->hasFile('image')) {
-            $file  = $request->image;
-            $fileNameHash = Str::random(20) . '.' . $file->getClientOriginalExtension();
-            $filePath = $request->file('image')->storeAs('public/rooms', $fileNameHash);
-            $dataUpdate['image'] = Storage::url($filePath);
-        }
+        // if ($request->hasFile('image')) {
+        //     $file  = $request->image;
+        //     $fileNameHash = Str::random(20) . '.' . $file->getClientOriginalExtension();
+        //     $filePath = $request->file('image')->storeAs('public/rooms', $fileNameHash);
+        //     $dataUpdate['image'] = Storage::url($filePath);
+        // }
 
         $rooms = $this->rooms->find($id)->update($dataUpdate);
         $this->roomservices->where('room_id', $id)->delete();

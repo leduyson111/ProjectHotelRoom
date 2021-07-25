@@ -3,13 +3,20 @@
 @section('title', 'Sửa phòng')
 @section('css')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.css" rel="stylesheet">
+
 @endsection
 
 @section('js')
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
-    <script src="{{ asset('admins/rooms/add.js') }}"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script> --}}
 
+    <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
+   
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"></script>
+
+    <script src="{{ asset('admins/rooms/add.js') }}"></script>
     <script>
           function addServices(e) {
             e.preventDefault();
@@ -69,11 +76,7 @@
                             </div>
                         @endforeach
                     </div>
-
-
                     <a href="" class="mb-2 btn btn-primary mr-2 add_services">Thêm dịch vụ</a>
-
-
                 </div>
             </div>
 
@@ -103,19 +106,27 @@
 
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="image" class="text-muted d-block mb-2">Ảnh phòng</label>
-                    <div class="input-group mb-3">
-                        <input type="file" name="image" id="image">
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                        <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                            <i class="fa fa-picture-o"></i> Choose
+                        </a>
+                        </span>
+                        <input required id="thumbnail" class="form-control" value="{{ $room->image }}" type="text" name="image">
                     </div>
-                    <img width="150"  height="150" src="{{ $room->image}}" alt="lỗi">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <div id="holder">
+                        <img  src="{{ $room->image  }}"  style="width: 200px;">
+                    </div>
                 </div>
             </div>
 
-            <div class="form-row">
+            <div  class="form-row">
                 <div class="form-group col-md-12">
                     <label for="inputState" class="text-muted d-block mb-2">Mô tả phòng</label>
-                    <textarea required class="form-control tinymce_editor_init" name="detail" cols="30"
-                        rows="10">{{ $room->detail }}</textarea>
+                    <textarea required style="height: 500px;"  class="form-control tinymce_editor_init" id="detail" name="detail" cols="50" rows="30">{{ $room->detail }}</textarea>
                 </div>
             </div>
             <button type="submit" class="mb-2 btn btn-success mr-2">Sửa</button>
