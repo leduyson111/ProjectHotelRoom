@@ -7,7 +7,7 @@
 @endsection
 
 @section('js')
-<script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
+<script src="{{ asset('/vendor/laravel-filemanager/js/stand-alone-button.js') }}"></script>
 <script src="{{ asset('admins/rooms/add.js') }}"></script>
 @endsection
 
@@ -26,27 +26,29 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                     </div>
-                    <input type="text" required name="name" class="form-control" placeholder="Nhập tên dịch vụ">
+                    <input type="text" value="{{ old('name' , '') }}" name="name" class="form-control" placeholder="Nhập tên dịch vụ">
                 </div>
+                @error('name')
+                    <span style="color: red; font-size:17px" >{{ $message }}</span>
+                @enderror
             </div>
 
-        
-                <div class="form-group col-md-6">
-                    <div class="input-group">
-                        <span class="input-group-btn">
-                        <a id="lfm" data-input="icon" data-preview="holder" class="btn btn-primary">
-                            <i class="fa fa-picture-o"></i> Choose
-                        </a>
-                        </span>
-                        <input required id="icon" class="form-control" type="text" name="icon">
-                    </div>
-
-                    <div id="holder">
-                        <img  src="{{ old('icon') ?: '(!empty($post) ? $post->icon : "")' }}"  style="margin-top:15px;max-height:100px;">
-                    </div>
-
-
+            <div class="form-group col-md-6">
+                <div class="input-group">
+                    <span class="input-group-btn">
+                    <a id="lfm" data-input="icon" data-preview="holder" class="btn btn-primary">
+                        <i class="fa fa-picture-o"></i> Choose
+                    </a>
+                    </span>
+                    <input  value="{{ old('icon' , '') }}" id="icon" class="form-control" type="text" name="icon">
                 </div>
+                <div id="holder">
+                    <img  src="{{ old('icon' , '') }}"  style="margin-top:15px;max-height:100px;">
+                </div>
+                @error('icon')
+                    <span style="color: red; font-size:17px" >{{ $message }}</span>
+                @enderror
+            </div>
 
             &nbsp;&nbsp;&nbsp;
             <button type="submit" class="mb-2 btn btn-success mr-2">Thêm</button>

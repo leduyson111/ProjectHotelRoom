@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ServicesRequest;
 use App\Models\Services;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -33,19 +34,13 @@ class ServicesController extends Controller
         return view('admin.services.add');
     }
 
-    public function store(Request $request)
+    public function store(ServicesRequest $request)
     {
         $dataCreate = [
             'name' => $request->name,
             'icon' => $request->icon
         ];
-
-        // if ($request->hasFile('icon')) {
-        //     $file  =$request->icon;
-        //     $fileNameHash = Str::random(20).'.'.$file->getClientOriginalExtension();
-        //     $filePath = $request->file('icon')->storeAs('public/services', $fileNameHash);
-        //     $dataCreate[ 'icon' ] = Storage::url($filePath);
-        // }
+    
         $this->services->create($dataCreate);
         return redirect()->route('services')->with('status', 'Thêm dịch vụ thành công');
     }
@@ -56,18 +51,12 @@ class ServicesController extends Controller
         return view('admin.services.edit', compact('service'));
     }
 
-    public function update($id, Request $request)
+    public function update($id, ServicesRequest $request)
     {
         $dataUpdate = [
             'name' => $request->name,
             'icon' => $request->icon
         ];
-        // if ($request->hasFile('icon')) {
-        //     $file  = $request->icon;
-        //     $fileNameHash = Str::random(20) . '.' . $file->getClientOriginalExtension();
-        //     $filePath = $request->file('icon')->storeAs('public/services', $fileNameHash);
-        //     $dataUpdate['icon'] = Storage::url($filePath);
-        // }
 
         $this->services->find($id)->update($dataUpdate);
         return redirect()->route('services')->with('status', 'Cập nhật dịch vụ thành công');

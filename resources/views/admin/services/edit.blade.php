@@ -27,9 +27,14 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                     </div>
-                    <input required type="text" name="name" value="{{ $service->name }}" class="form-control"
+                    <input  type="text" name="name" value="{{ $service->name }}" class="form-control"
                         placeholder="Nhập tên dịch vụ">
+                
                 </div>
+                @error('name')
+                    <span style="color: red; font-size:17px" >{{ $message }}</span>
+                @enderror
+          
             </div>
             <div class="form-group col-md-6">
                 <div class="input-group">
@@ -38,7 +43,11 @@
                         <i class="fa fa-picture-o"></i> Choose
                     </a>
                     </span>
-                    <input required id="thumbnail" class="form-control" value="{{ $service->icon }}" type="text" name="icon">
+                    <input  id="thumbnail" class="form-control" value="{{ $service->icon }}" type="text" name="icon">
+                    @error('icon')
+                        <span style="color: red; font-size:17px" >{{ $message }}</span>
+                    @enderror
+              
                 </div>
 
                 <div id="holder">

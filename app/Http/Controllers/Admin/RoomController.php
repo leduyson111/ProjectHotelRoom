@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RoomRequest;
 use App\Models\Room;
 use App\Models\RoomServices;
 use App\Models\Services;
@@ -21,7 +22,6 @@ class RoomController extends Controller
         $this->rooms = $roomModel;
         $this->roomservices = $roomservicesModel;
     }
-
 
     public function index()
     {
@@ -43,7 +43,7 @@ class RoomController extends Controller
         return view('admin.rooms.add', compact('services'));
     }
 
-    public function store(Request $request)
+    public function store(RoomRequest $request)
     {
         $dataCreate = [
             'room_no' => $request->room_no,
@@ -53,15 +53,7 @@ class RoomController extends Controller
             'image'=>$request->image,
         ];
 
-        // if ($request->hasFile('image')) {
-        //     $file  = $request->image;
-        //     $fileNameHash = Str::random(20) . '.' . $file->getClientOriginalExtension();
-        //     $filePath = $request->file('image')->storeAs('public/rooms', $fileNameHash);
-        //     $dataCreate['image'] = Storage::url($filePath);
-        // }
-
         $rooms = $this->rooms->create($dataCreate);
-
         if ($request->service_id) {
             foreach ($request->service_id as $key => $value) {
                 $dataCreatesee = [
@@ -75,7 +67,7 @@ class RoomController extends Controller
         return redirect()->route('rooms')->with('status', 'Thêm phòng thành công');
     }
 
-    public function update($id, Request $request)
+    public function update($id, RoomRequest $request)
     {
         $dataUpdate = [
             'room_no' => $request->room_no,
@@ -84,14 +76,6 @@ class RoomController extends Controller
             'price' => $request->price,
             'image'=>$request->image,
         ];
-
-        // if ($request->hasFile('image')) {
-        //     $file  = $request->image;
-        //     $fileNameHash = Str::random(20) . '.' . $file->getClientOriginalExtension();
-        //     $filePath = $request->file('image')->storeAs('public/rooms', $fileNameHash);
-        //     $dataUpdate['image'] = Storage::url($filePath);
-        // }
-
         $rooms = $this->rooms->find($id)->update($dataUpdate);
         $this->roomservices->where('room_id', $id)->delete();
         if ($request->service_id) {

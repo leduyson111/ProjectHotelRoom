@@ -8,15 +8,10 @@
 @endsection
 
 @section('js')
-    {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script> --}}
-    <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
    
+    <script src="{{ asset('/vendor/laravel-filemanager/js/stand-alone-button.js') }}"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"></script>
-
     <script src="{{ asset('admins/rooms/add.js') }}"></script>
-
-
     <script>
         function addServices(e) {
             e.preventDefault();
@@ -31,7 +26,6 @@
             $(document).on('click', '.delete_services', deleteServices);
         })
     </script>
-
 @endsection
 
 @section('content')
@@ -47,32 +41,22 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">@</span>
                         </div>
-                        <input type="text" required name="room_no" class="form-control" placeholder="Nhập tên phòng">
+                        <input type="text" value="{{ old('room_no') }}"   name="room_no" class="form-control" placeholder="Nhập tên phòng">
                     </div>
+
+                    @error('room_no')
+                        <span style="color: red; font-size:17px" >{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="form-group col-md-6">
                     <label for="iputName" class="text-muted d-block mb-2">Tên dịch vụ</label>
                     <div id="log">
-                        {{-- <div class="row">
-                            <div class="col-md-5">
-                                <select class="form-select form-control">
-                                    <option selected>Open this select menu</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                </select>
-                            </div>
-                            <div class="col-md-5">
-                                <input type="text" class="form-control" placeholder="Nhập tên phòng">
-                            </div>
-                            <div class="col-md-2">
-                                <button type="button" class="mb-2 btn btn-danger mr-2">Primary</button>
-                            </div>
-                        </div> --}}
+                        
+
+
                     </div>
                     <a href="" class="mb-2 btn btn-primary mr-2 add_services">Thêm dịch vụ</a>
-
-
                 </div>
             </div>
 
@@ -83,8 +67,12 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">@</span>
                         </div>
-                        <input type="text" required name="price" id="price" class="form-control" placeholder="Nhập tên danh mục">
+                        <input type="text"  value="{{ old('price') }}"  name="price" id="price" class="form-control" placeholder="Nhập tên danh mục">
                     </div>
+
+                    @error('price')
+                        <span style="color: red; font-size:17px" >{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="form-group col-md-6">
@@ -93,9 +81,12 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">@</span>
                         </div>
-                        <input min="1" max="30" type="number" required name="floor" id="floor" class="form-control"
+                        <input min="1" max="30" type="number"  value="{{ old('floor') }}"  name="floor" id="floor" class="form-control"
                             placeholder="Số tầng">
                     </div>
+                    @error('floor')
+                        <span style="color: red; font-size:17px" >{{ $message }}</span>
+                    @enderror
                 </div>
             </div>
 
@@ -107,13 +98,17 @@
                             <i class="fa fa-picture-o"></i> Choose
                         </a>
                         </span>
-                        <input required id="image" class="form-control" type="text" name="image">
+                        <input   value="{{ old('image') }}" id="image" class="form-control" type="text" name="image">
                     </div>
+                
+                    @error('image')
+                        <span style="color: red; font-size:17px" >{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="form-group col-md-6">
                     <div id="holder">
-                        <img  src='{{ old('image') ?: '(!empty($post) ? $post->image : "https://image.shutterstock.com/image-vector/view-vector-icon-260nw-576481969.jpg")' }}'  style="width: 200px;">
+                        <img  src='{{ old('image') }}'  style="width: 200px;">
                     </div>
                 </div>
 
@@ -122,7 +117,7 @@
             <div  class="form-row">
                 <div class="form-group col-md-12">
                     <label for="inputState" class="text-muted d-block mb-2">Mô tả phòng</label>
-                    <textarea required style="height: 500px;"  class="form-control tinymce_editor_init" id="detail" name="detail" cols="50" rows="30"></textarea>
+                    <textarea  class="form-control tinymce_editor_init" id="detail" name="detail" cols="50" rows="30"></textarea>
                 </div>
             </div>
             <button type="submit" class="mb-2 btn btn-success mr-2">Thêm</button>

@@ -5,7 +5,6 @@
 @section('js')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('admins/main.js') }}"></script>
-
 @endsection
 
 @section('content')
@@ -56,7 +55,6 @@
                             </tbody>
                         </table>
                         {{$rooms->links()}}
-
                     </div>
                 </div>
             </div>

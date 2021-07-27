@@ -48,6 +48,15 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link {{ Route::currentRouteNamed('users*') ? 'active' : '' }}"
+                    href="{{ route('users') }}">
+                    <i class="fab fa-product-hunt"></i>
+                    <span>Danh sách thành viên</span>
+                </a>
+            </li>
+
+
         </ul>
     </div>
 </aside>
